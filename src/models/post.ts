@@ -28,7 +28,7 @@ type TPost = Document & {
   title: string
   content?: string
   author: Types.ObjectId
-  comments: TComment[]
+  comments: Types.DocumentArray<TComment>
   upvotes: Types.Array<Types.ObjectId>
   downvotes: Types.Array<Types.ObjectId>
   score: number
@@ -118,5 +118,7 @@ postSchema.pre('save', function (next) {
 })
 
 type PostModel = Model<TPost, {}, PostMethods>
+type CommentModel = Model<TComment, {}>
 
 export const Post = model<TPost, PostModel>('Post', postSchema)
+export const Comment = model<TComment, CommentModel>('Comment', commentSchema)
